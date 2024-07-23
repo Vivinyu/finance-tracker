@@ -4,6 +4,14 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
+const typeDefs = require('./schemas');
+const resolvers = require('./resolvers');
+const User = require('./models/User');
+const cors = require('cors');
+const app = express();
+
+app.use(express.json());
+app.use(cors());
 
 dotenv.config();
 
@@ -36,7 +44,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    register: async (_, { username, email, password }) => {
+    register: async (_, { email, password }) => {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({ username, email, password: hashedPassword });
       await user.save();
@@ -76,6 +84,19 @@ const startServer = async () => {
 
   await server.start();
   server.applyMiddleware({ app });
+
+  app.post('/api/register', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = new User({ email, password: hashedPassword });
+      await user.save();
+      res.status(201).send({ message: 'User registered successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Registration failed' });
+    }
+  });
 
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => {
