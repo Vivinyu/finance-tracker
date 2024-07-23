@@ -3,7 +3,7 @@ import { Box, Text, VStack } from '@chakra-ui/react';
 
 const About = () => {
   return (
-    <Box bg="lightGreen" minH="100vh" p={4} color="white">
+    <Box bg="lightGreen" minH="100vh" p={4} color="black">
       <VStack spacing={8} align="center">
         <Text fontSize="4xl" fontWeight="bold">
           About Us
