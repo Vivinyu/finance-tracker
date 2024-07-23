@@ -13,6 +13,8 @@ import {
   Text,
   Image
 } from '@chakra-ui/react';
+import BackButton from '../components/BackButton';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -79,6 +81,7 @@ return (
             Log In
           </Button>
         </form>
+        <BackButton />
       </VStack>
     </Box>
   </Flex>

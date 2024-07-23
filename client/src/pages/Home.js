@@ -2,14 +2,16 @@ import React from 'react';
 import { Box, Button, Image, Flex, Text, Heading, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+// import { BackButton } from '../components/BackButton';
 const Home = () => {
   const history = useHistory();
 
   const handleAboutUsClick = () => {
     history.push('/about');
   };
-
+  const handleBackClick = () => {
+    history.push('/Back');
+  };
 return (
   <Flex
     direction="column"
@@ -38,6 +40,7 @@ return (
           objectFit="cover"
           borderRadius="lg"
         />
+        
         <Button
           size="lg"
           colorScheme="teal"
@@ -51,6 +54,7 @@ return (
           colorScheme="teal"
           size="lg"
           w="full"
+          
         >
           Log In
         </Button>
@@ -63,8 +67,15 @@ return (
         >
           Register
         </Button>
+        <Button
+          size="lg"
+          colorScheme="teal"
+          onClick={handleBackClick}
+        >
+          Back
+          </Button>
       </VStack>
-    </Box>
+          </Box>
   </Flex>
 );
 };

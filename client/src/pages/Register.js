@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../graphql/mutations';
 import { useAuth } from '../contexts/AuthContext';
+import { useHistory } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -12,7 +13,7 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -31,13 +32,14 @@ const Register = () => {
       console.error(err);
     }
   };
-
+  const handleBackClick = () => {
+        history.push('/Back');
+  };
   return (
     <Flex
       minH="100vh"
       align="center"
       justify="center"
-      bgImage="url('https://images.unsplash.com/photo-1565372912047-1b1dfdad26aa')"
       bgSize="cover"
       bgPosition="center"
       bgRepeat="no-repeat"
@@ -79,10 +81,18 @@ const Register = () => {
               mt={6}
               w="full"
             >
-              Register
+            Register
             </Button>
-          </form>
-        </VStack>
+            <Button
+          size="lg"
+          colorScheme="teal"
+          onClick={handleBackClick}
+        >
+          Back
+          </Button>
+                  </form>
+
+             </VStack>
       </Box>
     </Flex>
   );
